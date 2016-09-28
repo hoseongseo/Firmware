@@ -6,7 +6,12 @@ extern orb_advert_t mavlink_log_pub;
 
 // required number of samples for sensor
 // to initialize
-static const uint32_t 		REQ_VISION_INIT_COUNT = 5;
+
+// this is a vision based position measurement so we assume as soon as we get one
+// measurement it is initialized, we also don't want to deinitialize it because
+// this will throw away a correction before it starts using the data so we
+// set the timeout to 10 seconds
+static const uint32_t 		REQ_VISION_INIT_COUNT = 1;
 static const uint32_t 		VISION_TIMEOUT =    10000000;	// 10 s
 
 void BlockLocalPositionEstimator::visionInit()
